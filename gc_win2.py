@@ -32,7 +32,7 @@ for i in range(len(seq)-w):
 	print('%s %s %.4f' %(i+1, c, gc_count/w))
 
 
-#assisted adrian and jean after OH with Dr Korf, tysm
+#assisted adrian and haley after OH with Dr Korf, tysm
 """
 
 python3 gc_win2.py
