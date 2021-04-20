@@ -18,21 +18,8 @@ for i in range(0, len(seq)-w+1):
 			gc_count+=1
 	print('%s %s %.4f' %(i, c, gc_count/w))
 		
-		
-"""
-	if dna[i] == 'C' or dna[i] == 'G':
-	gc_count+=1
-dec = gc_count/len(dna)
-print(win, codon, dec)
+#assisted by Jean and I helped out Adrian		
 
-for frame in range(3):
-	for position in range(frame, len(seq) -2, 3):
-		codon = seq[position:position+3]
-		if codon == 'ATG':
-			print(f'start codon at {position} in frame {frame+1}')
-		elif codon == 'TAA' or codon == 'TAG' or codon == 'TGA':
-			print(f'stop codon at {position} in frame {frame+1}')
-"""
 """
 python3 gc_win.py
 0 ACGACGCAGGA 0.6364
