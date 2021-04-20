@@ -30,12 +30,10 @@ for i in range(len(seq)-w):
 	c = seq[i+1:i+w+1]
 	
 	print('%s %s %.4f' %(i+1, c, gc_count/w))
-"""
-print(f'{gc_count/len(dna):.2f}')
-print('%.2f' % (gc_count/len(dna)))
-print('{:.2f}'.format(gc_count/len(dna)))
-print(f'{gc_count/len(dna):.2f}')
 
+
+#assisted adrian and jean after OH with Dr Korf, tysm
+"""
 
 python3 gc_win2.py
 0 ACGACGCAGGA 0.6364
