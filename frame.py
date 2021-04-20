@@ -8,32 +8,21 @@ dna = 'ATGGCCTTT'
 
 
 for i in range(len(dna)):
-	
-	print(i, i%3 , dna[i])		
-				
-	
+	print(i, i%3 , dna[i])			
 print()
 
 
 """
-	#for frame in range(3):
-		#or position in range(frame, len(dna)-2,3):
-			#codon = dna[position:position+3]
-	#if f == 0 : f = 0
-for frame in range (3):
-	#print (f'reading frame {frame+1}', end =' ')
-	for position in range(frame, len(dna)-2, 3):
-		codon= dna[position:position+3]
-		print(f'in frame{frame+1}')
-	
-for frame in range(3):
-	for position in range(frame, len(dna) -2, 3):
-		codon = dna[position:position+3]
-		if codon == 'ATG':
-			print(f'start codon at {position} in frame {frame+1}')
-		elif codon == 'TAA' or codon == 'TAG' or codon == 'TGA':
-			print(f'stop codon at {position} in frame {frame+1}')
-"""
+for j in range(0, len(dna)):
+	#print (j, end =' ')
+	for k in range(j):
+		print (j, k%3, dna[j])
+
+# attempting nested loop but I don't quite know how.
+
+
+"""	
+
 """
 python3 frame.py
 0 0 A
