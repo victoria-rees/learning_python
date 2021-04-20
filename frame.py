@@ -18,7 +18,7 @@ for j in range(0, len(dna), 3):
 	for k in range(0, 3):
 		print (j+k, k, dna[j+k])
 
-# attempting nested loop but I don't quite know how.
+#Adrian helped me understand what I missed, also assisted him in the first portion
 
 	
 
