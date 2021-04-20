@@ -18,7 +18,7 @@ for i in range(0, len(seq)-w+1):
 			gc_count+=1
 	print('%s %s %.4f' %(i, c, gc_count/w))
 		
-#assisted by Jean and I helped out Adrian		
+#assisted by Haley and I helped out Adrian		
 
 """
 python3 gc_win.py
