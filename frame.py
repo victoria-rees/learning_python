@@ -12,16 +12,15 @@ for i in range(len(dna)):
 print()
 
 
-"""
-for j in range(0, len(dna)):
-	#print (j, end =' ')
-	for k in range(j):
-		print (j, k%3, dna[j])
+
+for j in range(0, len(dna), 3):
+	
+	for k in range(0, 3):
+		print (j+k, k, dna[j+k])
 
 # attempting nested loop but I don't quite know how.
 
-
-"""	
+	
 
 """
 python3 frame.py
