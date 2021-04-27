@@ -9,7 +9,7 @@
 
 import sys
 import random
-import math
+
 
 # ---------------
 #assign command line values to variables:
@@ -30,41 +30,28 @@ coverage is total bases generated/size of genome
 
 1st we need to create another list, fill w random 
 """
-c_bp = 0	#counting the 
+bp = [0 for j in range(g_siz)]
+
 for j in range(r_num):
-	bp = [] #for each num of reads, we have a new bp list
-	for k in range(g_siz):
-		bp.append(random.randint(0, r_len-1)) #adds random number of len
+	a = random.randint(0, g_siz - r_len) 
+	b = a + r_len
+	for k in range(a, b):
+		bp[k] += 1
 		
-#print(bp)
+min = bp[r_len]
+max = bp[r_len]
+tot = 0
+
+for l in bp[r_len : -r_len]:
+	if l < min : min = l
+	if l > max : max = l
+	tot += l
+	
+print(min, max, tot/(g_siz - 2*r_len))
+"""	
+entirely helped by Adrian, he explained why it works this way as well.
+
 """
-for m in range(len(bp)):
-	x = bp[m] / g_siz
-
-	print(x)
-
-"""
-#report min coverage
-print('The minimum coverage is: ' )
-print(min(bp))
-
-#report max coverage
-print('The maximum coverage is: ')
-print(max(bp))
-
-#report avg coverage
-	#count of bp generated		
-c_bp = 0
-for a in range(len(bp)):
-	c_bp += 1
-
-print('The average coverage is: ')
-sum = 0
-for z in range(1,len(bp)-1):
-	sum += bp[z]
-print(sum/c_bp)	
-
-
 """
 python3 xcoverage.py 1000 100 100
 5 20 10.82375
