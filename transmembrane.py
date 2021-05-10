@@ -75,10 +75,11 @@ for id,seq in zip(ids, proteins):
 	if alpha(sig, 8, 2.5) and alpha(hyd, 11, 2): #conditions from lines 13/14
 		print(ids)
 		
-		
-
-
-
+	
+"""
+assisted by adrian and Haley. initially had an else statement to combine E/Q/D/N
+but that may impact values due to * being a stop codon and not on the list for AAs
+"""
 
 
 
