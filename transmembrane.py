@@ -38,7 +38,7 @@ def kd(seq):
 		elif aa == 'E' : hydro -= 3.5 
 		elif aa == 'Q' : hydro -= 3.5 
 		elif aa == 'D' : hydro -= 3.5 
-		elif aa == 'N' : hydro -= 3.5 	
+		elif aa == 'N' : hydro -= 3.5 	#initially had an else 
 	return hydro/len(seq)
 	
 def alpha(seq, w, h): #window and kd values(h) of signal or hydroph regions
@@ -74,9 +74,11 @@ for id,seq in zip(ids, proteins):
 	#only a transmembrane protein if alpha = true for signal AND hydroph regions
 	if alpha(sig, 8, 2.5) and alpha(hyd, 11, 2): #conditions from lines 13/14
 		print(ids)
-		
-		
-
+			
+"""
+assisted by adrian and Haley. initially had an else statement to combine E/Q/D/N
+but that may impact values due to * being a stop codon and not on the list for AAs
+"""	
 
 
 
