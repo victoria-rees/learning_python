@@ -76,8 +76,14 @@ for n in lengths:
 #print(lengths)
 print('number of genes produced:', count)
 
-			
-#making a histogram!
+#histogram
+histogram = [0] * (max(lengths) + 1)
+for t in lengths: 
+	histogram[t] += 1
+print(histogram)
+
+"""			
+#making a histogram, only looking at the duplicated values, not all positions
 for x in range(len(lengths)):
 	dup = 0
 	for y in range(len(lengths)):
@@ -89,7 +95,7 @@ for x in range(len(lengths)):
 	#Issue: if lengths[x] is dup 6 times, you'll see it 6 times :(
 	
 	print(lengths[x], dup)
-	
+"""	
 
 """
 worked and problem solved with Adrian
