@@ -92,6 +92,9 @@ for x in range(len(lengths)):
 	
 
 """
+worked and problem solved with Adrian
+
+
 how many times did i see length x? 
 how many counts at each length			
 			
