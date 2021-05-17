@@ -29,7 +29,7 @@ for i in range(trial):
 	for j in range(ppl):
 		bday = random.randint(0, days-1)
 		calendar[bday] += 1
-	#print(calendar)
+	print(calendar)
 	
 	#check for dups
 	for day in calendar:
