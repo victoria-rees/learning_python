@@ -1,6 +1,7 @@
 import argparse
 import math
 import mcb185
+import os
 
 """
 # Write a program that finds and masks low entropy sequence
@@ -19,6 +20,11 @@ character (N for nt, X for aa) or lowercase. Your program should work with
 either nucleotide or amino acid sequence and have separate default thresholds
 for each. The output should allow for lowercase, N, or X, as appropriate. It
 should also report the sequence as a FASTA file in 80 column width.
+
+break down "idiot proof"- file empty, letters that are not incl in lists
+	tell them they dumb
+	- 
+
 """
 
 # setup argparse to enter in seq file/window size/threshold
@@ -34,16 +40,27 @@ parser.add_argument('--t1', required=False, type=float, default=1.0,
 	metavar='<float>', help='default threshold for nts [%(default).3f]')
 parser.add_argument('--t2', required=False, type=float, default=2.5,
 	metavar='<float>', help='default threshold for AAs [%(default).3f]')
-
-parser.add_argument('--X', action='store_true',
-	help='on= receive output with X, off = receive output with lowercase')
+#switch default aa and nt 
+parser.add_argument('--nt', action='store_true',
+	help='on= you are inputing a nt seq, off = file has AA seq')
+parser.add_argument('--lc', action='store_true',
+	help='on= receive output with lowercase, off = receive output with N or X')
 # finalization
 arg = parser.parse_args()
 
-#read the fasta file in AAs
-for name, seq in mcb185.read_fasta(arg.fasta):
-	print(f'>{name}')
+#making sure input file is fasta, not empty, and correct
+filesize = os.path.getsize(arg.fasta)
+if filesize == 0:
+	print("This file is empty")
 
+#read the fasta file in AAs
+if arg.fasta.endswith('.fa'):
+	for name, seq in mcb185.read_fasta(arg.fasta): #making sure it's fa file
+		seq = seq.upper() #makes all letters upper if they have lower  in their file
+		print(f'>{name}')
+else: 
+	print("wrong file type, did not provide a fasta file")
+	exit()
 
 def entropy(probs):
 	assert(math.isclose(sum(probs), 1.0))
@@ -154,26 +171,32 @@ w = arg.w
 t1 = arg.t1 #nt
 t2 = arg.t2 #aa
 
-if 'M' in seq: 
-	for i in range(len(seq)-w + 1):
-		wind = seq [i : i+w]
-		h = aa_seq_entropy(wind)
-		if h >= t2 : out += seq[i]
-		elif arg.X : out += 'X' #because N exists in AA seq
-		else: 		 out += seq[i].lower()
-	print(out)
-else: 
+
+if arg.nt: #if the user inputs --nt, then they are using nt seq
 	for i in range(len(seq)-w + 1):
 		wind = seq [i : i+w]
 		h = nt_seq_entropy(wind)
 		if h >= t1 : out += seq[i]
-		elif arg.X : out += 'X' #can use X or N but convenient to keep switch
-		else: 		 out += seq[i].lower()
+		elif arg.lc : out += seq[i].lower()
+		else: 		  out += 'N' #if user didn't put lc, they want N
 	print(out)	
+else: 
+	for i in range(len(seq)-w + 1):
+		wind = seq [i : i+w]
+		h = aa_seq_entropy(wind)
+		if h >= t2 : out += seq[i]
+		elif arg.lc: out += seq[i].lower() #if user inputs lc, they want lowercase
+		else:		 out += 'X' #because N exists in AA seq 		 
+	print(out)
+
+	
 
 
 """
 Final project collaboration with Adrian
+still needed- fool proof if aa contains letters not in aa code- print that
+			- fool proof if person turned on switch for nt but its aa 
+			- fool proof if person leaves switch off but it IS nt.
 """
 
 
