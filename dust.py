@@ -173,9 +173,6 @@ def aa_seq_entropy(seq):
 #looking through protein
 out = ''
 w = arg.w
-t1 = arg.t1 #nt
-t2 = arg.t2 #aa
-
 t = None
 r = None
 f = None #new! store funct in variable!!
