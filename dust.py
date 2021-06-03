@@ -24,6 +24,10 @@ should also report the sequence as a FASTA file in 80 column width.
 break down "idiot proof"- file empty, letters that are not incl in lists
 	tell them they dumb
 	- 
+command lines:
+python3 --fasta Data/aa_prot.fa 
+python3 --fasta Data/nt_prot.fa --nt
+python3 --fasta Data/datadump.py
 
 """
 
@@ -52,8 +56,9 @@ arg = parser.parse_args()
 filesize = os.path.getsize(arg.fasta)
 if filesize == 0:
 	print("This file is empty")
-
-#read the fasta file in AAs
+	exit()
+	
+#read the fasta file in AAs- check if first line has >
 if arg.fasta.endswith('.fa'):
 	for name, seq in mcb185.read_fasta(arg.fasta): #making sure it's fa file
 		seq = seq.upper() #makes all letters upper if they have lower  in their file
@@ -163,7 +168,7 @@ def aa_seq_entropy(seq):
 		return 0
 
 #seq = 'MKLMMMMMMMGPPPKLTTTGTTTHIIIKRRRRRRRRRRRRRR'
-
+#not_aa = ['B', 'J', 'O', 'U', 'X', 'Z']
 
 #looking through protein
 out = ''
@@ -171,25 +176,27 @@ w = arg.w
 t1 = arg.t1 #nt
 t2 = arg.t2 #aa
 
+t = None
+r = None
+f = None #new! store funct in variable!!
 
-if arg.nt: #if the user inputs --nt, then they are using nt seq
-	for i in range(len(seq)-w + 1):
-		wind = seq [i : i+w]
-		h = nt_seq_entropy(wind)
-		if h >= t1 : out += seq[i]
-		elif arg.lc : out += seq[i].lower()
-		else: 		  out += 'N' #if user didn't put lc, they want N
-	print(out)	
-else: 
-	for i in range(len(seq)-w + 1):
-		wind = seq [i : i+w]
-		h = aa_seq_entropy(wind)
-		if h >= t2 : out += seq[i]
-		elif arg.lc: out += seq[i].lower() #if user inputs lc, they want lowercase
-		else:		 out += 'X' #because N exists in AA seq 		 
-	print(out)
-
+if arg.nt:
+	t = arg.t1
+	r = 'N'
+	f = nt_seq_entropy
+else:
+	t = arg.t2
+	r = 'X'
+	f = aa_seq_entropy
 	
+for i in range(len(seq)-w + 1):
+	wind = seq [i : i+w]
+	h = f(wind)
+	if h >= t : out += seq[i]
+	elif arg.lc : out += seq[i].lower()
+	else: 		  out += r #if user didn't put lc, they want N
+print(out)
+
 
 
 """
